@@ -252,6 +252,7 @@ $annonces_publiees = $stmt->fetchAll();
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
+                <li><a href="index.php" class="active">Accueil</a></li>
                 <li><a href="dashboard.php">Tableau de bord</a></li>
                 <?php if (isset($_SESSION['id_utilisateur'])): ?>
                     <li><a href="profil.php">Profil</a></li>
