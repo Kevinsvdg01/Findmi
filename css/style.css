@@ -1,0 +1,693 @@
+/* css/style.css */
+
+/* --- Variables et Styles Globaux --- */
+:root {
+  --primary-color: #0056b3;
+  --secondary-color: #007bff;
+  --accent-color: #ffc107;
+  --danger-color: #dc3545;
+  --text-color: #333;
+  --bg-color: #f8f9fa;
+  --white-color: #fff;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.main-container,
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+}
+
+/* --- Barre de Navigation --- */
+.navbar {
+  background-color: var(--white-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: #dc3545;
+}
+
+.menu-toggle {
+  display: none;
+  /* Caché sur desktop */
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* --- Hero Section (Header) --- */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white-color);
+  text-align: center;
+  padding: 5rem 1rem;
+  animation: fadeInDown 1s ease-out;
+}
+
+.hero-logo {
+  width: 120px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  border: 3px solid var(--white-color);
+}
+
+.hero-title {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
+
+.search-bar {
+  margin-top: 2.5rem;
+}
+
+.search-bar form {
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  width: 50%;
+  max-width: 500px;
+  padding: 1rem;
+  border: none;
+  border-radius: 50px 0 0 50px;
+  font-size: 1rem;
+}
+
+.search-bar button {
+  padding: 1rem 1.5rem;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  border-radius: 0 50px 50px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+  background-color: #ffda6a;
+}
+
+/* Media Query pour Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--white-color);
+    position: absolute;
+    top: 70px;
+    /* Hauteur de la navbar */
+    left: 0;
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .search-bar input {
+    width: 70%;
+  }
+}
+
+
+
+
+
+
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #004494;
+}
+
+
+
+.errors {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+
+
+/* --- Styles pour le Tableau de Bord --- */
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white-color);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.dashboard-header h1 {
+  margin: 0;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.alert-danger {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  /* Sidebar fixe, contenu flexible */
+  gap: 2rem;
+}
+
+/* --- Sidebar (colonne de gauche) --- */
+.stats-card {
+  background: var(--white-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.stats-card h3 {
+  margin-top: 0;
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+  color: var(--secondary-color);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.new-annonce-toggle {
+  margin-top: 1.5rem;
+}
+
+.new-annonce-toggle button {
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+}
+
+.form-section {
+  background: var(--white-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  transition: all 0.5s ease;
+}
+
+.form-section.hidden {
+  max-height: 0;
+  padding: 0 1.5rem;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.form-section:not(.hidden) {
+  max-height: 1000px;
+  /* Assez grand */
+  opacity: 1;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-warning {
+  background: #fff3cd;
+  color: #856404;
+  padding: 0.7rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+/* --- Contenu Principal (colonne de droite) --- */
+.empty-list-message {
+  text-align: center;
+  color: #777;
+  padding: 3rem;
+  background: #fdfdfd;
+  border: 2px dashed #eee;
+  border-radius: 8px;
+}
+
+.dash-annonce-card {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--white-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.3s;
+}
+
+.dash-annonce-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dash-annonce-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.dash-annonce-content {
+  flex: 1;
+}
+
+.dash-annonce-content h4 {
+  margin: 0 0 0.5rem;
+}
+
+.annonce-meta {
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.rejection-reason {
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.annonce-status-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statut-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-en-attente-validation {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.status-publiee {
+  background-color: #28a745;
+}
+
+.status-rejetee {
+  background-color: #dc3545;
+}
+
+.status-retrouve {
+  background-color: #6c757d;
+}
+
+/* --- Dropdown des actions (VERSION RESPONSIVE) --- */
+.actions-dropdown {
+  position: relative;
+}
+
+.actions-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  /* Légèrement plus grand pour un meilleur confort sur mobile */
+  height: 35px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.actions-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.dropdown-content {
+  /* On cache le menu avec l'opacité et on le déplace pour l'animation */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.95);
+
+  position: absolute;
+  right: 0;
+  background: var(--white-color);
+  box-shadow: var(--shadow);
+  border-radius: 8px;
+  /* Bords un peu plus arrondis */
+  z-index: 10;
+  min-width: 160px;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  /* Ajoute un peu d'espace en haut et en bas */
+
+  /* Transition douce pour l'apparition */
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+/* La classe .show, ajoutée par JS, rend le menu visible */
+.dropdown-content.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* On supprime la règle :hover qui n'est plus utile */
+/* .actions-dropdown:hover .dropdown-content { display: block; }  <- CETTE LIGNE EST SUPPRIMÉE */
+
+.dropdown-item {
+  display: flex;
+  /* Utiliser flex pour aligner icône et texte */
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.8rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f4f4f9;
+}
+
+.dropdown-item.success {
+  color: #198754;
+}
+
+.dropdown-item.edit {
+  color: #c89803;
+}
+
+/* Couleur un peu plus foncée pour le contraste */
+.dropdown-item.danger {
+  color: #dc3545;
+}
+
+
+/* --- RESPONSIVE DESIGN POUR LE TABLEAU DE BORD ET LE RESTE DU SITE --- */
+
+/* Pour les tablettes et appareils de taille moyenne (jusqu'à 992px) */
+@media (max-width: 992px) {
+  .dashboard-grid {
+    /* On passe à une seule colonne pour que la sidebar soit au-dessus du contenu principal */
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-sidebar {
+    /* On centre les éléments de la sidebar sur tablette */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stats-card,
+  .new-annonce-toggle {
+    width: 100%;
+    max-width: 500px;
+    /* On limite la largeur pour un meilleur aspect */
+  }
+}
+
+/* Pour les téléphones mobiles (jusqu'à 768px) */
+@media (max-width: 768px) {
+
+  /* Styles généraux déjà présents pour le menu hamburger (on les garde) */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--white-color);
+    position: absolute;
+    top: 60px;
+    /* Ajustez si la hauteur de votre navbar est différente */
+    left: 0;
+    padding: 1rem 0;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  /* Ajustements pour le tableau de bord sur mobile */
+  .dashboard-container {
+    padding: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-header p {
+    font-size: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    /* On garde deux colonnes pour les stats, c'est plus compact */
+  }
+
+  /* Le plus important : la carte d'annonce sur mobile */
+  .dash-annonce-card {
+    flex-direction: column;
+    /* On empile l'image et le contenu */
+    gap: 1rem;
+  }
+
+  .dash-annonce-img {
+    width: 100%;
+    /* L'image prend toute la largeur de la carte */
+    height: 180px;
+    /* Hauteur fixe pour l'image */
+  }
+
+  .annonce-status-actions {
+    /* On s'assure que le statut et les actions sont bien alignés */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dropdown-content {
+    /* Assure que le menu déroulant ne sort pas de l'écran */
+    transform: translateX(-80%);
+  }
+
+  /* Ajustements pour le formulaire de la page d'accueil */
+  .search-bar form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-bar input {
+    width: 100%;
+    border-radius: 50px;
+    /* On arrondit tous les coins */
+    text-align: center;
+  }
+
+  .search-bar button {
+    width: 100%;
+    border-radius: 50px;
+  }
+}
+
+
+
+
+
+
+
+
