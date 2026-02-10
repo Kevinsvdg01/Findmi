@@ -35,7 +35,7 @@ if (!$annonce) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détail de l'annonce : <?= htmlspecialchars($annonce['titre']) ?> - Findmi</title>
+    <title>Détail de l'annonce : <?= htmlspecialchars($annonce['titre']) ?> - <?= SITE_NAME ?? 'Findmi' ?></title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         body { display: block; background-color: #f4f4f9; }
@@ -89,7 +89,7 @@ if (!$annonce) {
 <body>
 
     <nav class="navbar">
-        <h1><a href="index.php">Findmi</a></h1>
+        <h1><a href="index.php"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></a></h1>
         <div>
             <?php if (isset($_SESSION['id_utilisateur'])): ?>
                 <a href="dashboard.php">Mon tableau de bord</a>
@@ -121,8 +121,11 @@ if (!$annonce) {
                 <div class="contact-info">
                     <p>Vous avez trouvé ce document ? Vous reconnaissez cette personne ?</p>
                     <p>Pour des raisons de sécurité, la mise en relation se fait via la plateforme.</p>
-                    <a href="connexion.php" class="btn">Connectez-vous pour contacter le déclarant</a>
-                    <!-- Plus tard, on fera un lien direct vers la messagerie si l'utilisateur est connecté -->
+                    <?php if (isset($_SESSION['id_utilisateur'])): ?>
+                        <a href="messagerie.php?id_annonce=<?= htmlspecialchars($id_annonce) ?>" class="btn">Contacter le déclarant</a>
+                    <?php else: ?>
+                        <a href="connexion.php" class="btn">Connectez-vous pour contacter le déclarant</a>
+                    <?php endif; ?>
                 </div>
 
             </div>

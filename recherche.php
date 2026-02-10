@@ -44,7 +44,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Résultats de recherche pour "<?= htmlspecialchars($search_query) ?>" - Findmi</title>
+    <title>Résultats de recherche pour "<?= htmlspecialchars($search_query) ?>" - <?= SITE_NAME ?? 'Findmi' ?></title>
     <link rel="stylesheet" href="css/style.css">
     <!-- On réutilise les mêmes styles que pour la page d'accueil -->
     <style>
@@ -113,7 +113,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 <body>
 
     <header class="header">
-        <h1><a href="index.php" style="color:white; text-decoration:none;">Findmi</a></h1>
+        <h1><a href="index.php" style="color:white; text-decoration:none;"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></a></h1>
         <div class="search-bar">
             <!-- On affiche la barre de recherche ici aussi pour permettre une nouvelle recherche -->
             <form action="recherche.php" method="GET">

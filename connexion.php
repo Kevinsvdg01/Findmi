@@ -156,26 +156,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.php" class="nav-logo">Findmi</a> <!-- Bouton hamburger -->
+            <a href="index.php" class="nav-logo"><?= SITE_NAME ?? 'Findmi' ?></a> <!-- Bouton hamburger -->
             <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="recherche.php"><i class="fas fa-search"></i>Rechercher</a></li>
-                <li><a href="connexion.php" class="user active">Connexion <i class="fa fa-user"></i></a></li>
-                <li><a href="apropos.php">A Propos</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="index.php"><?= htmlspecialchars(t('home')) ?></a></li>
+                <li><a href="recherche.php"><i class="fas fa-search"></i> <?= htmlspecialchars(t('search')) ?></a></li>
+                <li><a href="connexion.php" class="user active"><?= htmlspecialchars(t('login')) ?> <i class="fa fa-user"></i></a></li>
+                <li><a href="apropos.php"><?= htmlspecialchars(t('about')) ?></a></li>
+                <li><a href="contact.php"><?= htmlspecialchars(t('contact')) ?></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="bann">
-        <p>Connectez-vous maintenant !</p>
+        <p><?= htmlspecialchars(t('login_prompt')) ?></p>
     </div>
 
     <div class="login-container">
-        <h2>Se connecter à Findmi</h2>
+        <h2>Se connecter à <?= SITE_NAME ?? 'Findmi' ?></h2>
 
         <?php
         // Afficher le message de succès de l'inscription s'il existe

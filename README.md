@@ -5,36 +5,235 @@ Le projet vise à faciliter la mise en relation entre utilisateurs à travers un
 
 ---
 
+## 📋 Tables des matières
+
+- [Fonctionnalités](#-fonctionnalités)
+- [Architecture](#-architecture)
+- [Technologies](#-technologies-utilisées)
+- [Installation](#-installation-et-configuration)
+- [Structure du projet](#-structure-du-projet)
+- [Configuration avancée](#-configuration-avancée)
+- [Pages et fonctionnalités](#-pages--fonctionnalités)
+- [Système d'administration](#-système-dadministration)
+- [Internationalisation (i18n)](#-internationalisation-i18n)
+- [Troubleshooting](#-troubleshooting)
+- [Contribution](#-contribution)
+- [Auteur](#-auteur)
+
+---
+
 ## 🚀 Fonctionnalités
 
-- 👤 Système d’inscription et de connexion des utilisateurs  
-- 📢 Publication et gestion d’annonces  
-- 🔍 Recherche d’annonces par mots-clés  
-- 🧾 Consultation des détails d’une annonce  
-- 🧑‍💼 Tableau de bord utilisateur  
-- ✏️ Modification et suppression d’annonces  
-- 📤 Upload de fichiers (images)  
-- 🔐 Déconnexion sécurisée  
-- 📄 Pages informatives (À propos, Contact, etc.)
+### Utilisateurs
+- ✅ Inscription et connexion sécurisées (password_hash/verify)
+- ✅ Gestion complète du profil (nom, email, téléphone)
+- ✅ Changement de mot de passe avec validation
+- ✅ Historique d'activité et statistiques personnelles
+- ✅ Dashboard utilisateur avec stats et raccourcis
+
+### Annonces
+- ✅ Publication d'annonces avec titre, description, images
+- ✅ Modification et suppression d'annonces
+- ✅ Statut d'annonce : "en attente", "active", "retrouvée", "fermée"
+- ✅ Recherche avancée par catégorie, localisation, mots-clés
+- ✅ Détails riches d'annonce avec images et contact
+- ✅ Upload sécurisé de fichiers (images uniquement)
+
+### Messagerie & Modération
+- ✅ Système de messagerie entre utilisateurs (conversations)
+- ✅ Messages avec validation par autorité/modérateur
+- ✅ Tableaux d'historique (approuvés, rejetés, en attente)
+- ✅ Workflow de modération avec transactions BD
+- ✅ Marquage d'annonce comme "retrouvée" lors approbation
+- ✅ Notifications intégrées
+
+### Administration
+- ✅ Tableau de bord admin avec statistiques globales
+- ✅ Modération des messages avec visualisation par statut
+- ✅ Gestion des permissions et des autorités
+- ✅ Paramètres du site (nom, email, langue)
+- ✅ Mode maintenance global avec page personnalisée
+- ✅ Historique des actions de validation
+
+### Site
+- ✅ Page d'accueil avec hero section et recherche
+- ✅ À propos et informations
+- ✅ Contact avec envoi email (PHPMailer)
+- ✅ Mentions légales et politique de confidentialité
+- ✅ Footer avec liens importants
+- ✅ Navigation responsive
+
+### Sécurité & Multilingue
+- ✅ Validation côté serveur de tous les formulaires
+- ✅ CSRF tokens pour les actions sensibles
+- ✅ Sessions PHP sécurisées avec timeout
+- ✅ Protection des données personnelles
+- ✅ Support multilingue (FR/EN)
+- ✅ Système i18n avec traductions personnalisables
+
+---
+
+## 🏗️ Architecture
+
+### Flux de données
+
+```
+┌──────────────┐
+│  Utilisateur │
+└──────┬───────┘
+       │
+       ▼
+┌──────────────────────────────┐
+│  Page HTTP (PHP)             │
+│  (index.php, dashboard, etc) │
+└──────┬───────────────────────┘
+       │
+       ▼
+┌──────────────────────────────┐
+│  Logique métier              │
+│  (core/db_connect.php)       │
+│  (include fichiers)          │
+└──────┬───────────────────────┘
+       │
+       ▼
+┌──────────────────────────────┐
+│  PDO / MySQL                 │
+│  (findmi_db via BD schema)   │
+└──────────────────────────────┘
+```
 
 ---
 
 ## 🛠️ Technologies utilisées
 
-- **Frontend**
-  - HTML5
-  - CSS3
-  - JavaScript
+### Frontend
+- **HTML5** — Structure sémantique
+- **CSS3** — Flexbox, Grid, animations, gradients
+- **JavaScript Vanilla** — Pas de framework (léger et rapide)
+- **Font Awesome 6.4** — Icônes modernes
+- **Google Fonts** — Typographie
 
-- **Backend**
-  - PHP (procédural)
-  - MySQL
+### Backend
+- **PHP 8.x** — Langage serveur (procédural)
+- **MySQL 8.0** — Base de données relationnelle
+- **PDO** — Abstraction BD avec requêtes préparées
+- **PHPMailer** — Envoi d'emails SMTP ( a configurer dans la page contact: Votre_mot_de_passe &Votre_mail)
 
-- **Outils**
-  - Git & GitHub
-  - Serveur local (XAMPP, WAMP ou Laragon)
+### Infrastructure
+- **XAMPP / WAMP / Laragon** — Serveur local (Apache + MySQL)
+- **Git & GitHub** — Versioning
+- **Composer** — Gestion des dépendances
 
 ---
+
+## ⚙️ Installation et configuration
+
+### Prérequis
+- PHP 8.0+, MySQL 5.7+, Apache
+- Composer (optionnel)
+
+
+### Configuration BD
+
+`core/db_connect.php` :
+```php
+$host = 'localhost';
+$dbname = 'findmi_db';
+$user = 'root';
+$pass = '';
+```
+
+---
+
+## 📁 Structure du projet
+
+```
+findmi_site/
+├── core/          # DB, i18n, configs
+├── admin/         # Tableau de bord admin
+├── lang/          # Traductions FR/EN
+├── css/           # Styles
+├── uploads/       # Images annonces
+├── index.php      # Accueil
+├── dashboard.php  # Mes annonces
+├── profil.php     # Profil utilisateur
+├── messagerie.php # Conversations
+└── findmi_db.sql  # Dump BD
+```
+
+---
+
+## 🔧 Configuration
+
+### Paramètres site (depuis DB)
+
+- `SITE_NAME` — Nom du site
+- `SITE_EMAIL` — Email contact
+- `DEFAULT_LANGUAGE` — Langue (fr/en)
+- `MAINTENANCE_MODE` — Mode maintenance
+
+### Mode Maintenance
+
+Crée `.maintenance` ou update BD :
+```sql
+UPDATE settings SET setting_value = '1' WHERE setting_key = 'maintenance_mode';
+```
+
+---
+
+## 📄 Pages principales
+
+| Page | URL |
+|------|-----|
+| Accueil | `/` |
+| Connexion | `/connexion.php` |
+| Dashboard | `/dashboard.php` |
+| Profil | `/profil.php` |
+| Messagerie | `/messagerie.php` |
+| Admin | `/admin/` |
+| Modération | `/admin/moderation_messages.php` |
+
+---
+
+## 🐛 FAQ
+
+**Q: "Undefined constant SITE_NAME"**
+A: Ajoute `require_once 'core/db_connect.php';` en haut de page
+
+**Q: Erreur 503 Maintenance**
+A: Supprime `.maintenance` ou désactive en BD
+
+**Q: Colonne manquante dans messages**
+A: Exécute la migration dans `historique_messages.php`
+
+---
+
+## 🤝 Contribution
+
+Fork → Branch → Commit → Pull Request
+
+Domaines à améliorer :
+- Tests unitaires
+- API REST
+- WebSockets messagerie
+- Géolocalisation
+- Analytics
+
+---
+
+## 👨‍💻 Auteur
+
+**Kevin Savadogo** — Développeur Web
+- 🔗 GitHub : [@Kevinsvdg01](https://github.com/Kevinsvdg01)
+- 📍 Burkina Faso
+
+---
+
+## 📄 Licence
+
+**MIT License** — Libre utilisation à fins éducatives et personnelles
+
+**Merci d'utiliser Findmi ! 🙏**
 
 ## ⚙️ Installation et configuration
 
@@ -85,13 +284,6 @@ Accès restreint aux pages sensibles
 🛡️ Renforcement de la sécurité
 
 📊 Statistiques et analytics
-
-👨‍💻 Auteur
-Kevin Savadogo
-Développeur web
-📍 Burkina Faso
-
-GitHub : Kevinsvdg01
 
 📄 Licence
 Ce projet est open-source et peut être utilisé à des fins éducatives et personnelles.

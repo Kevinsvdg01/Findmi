@@ -162,7 +162,7 @@ $categories = $stmt_cat->fetchAll();
 <body>
 
     <nav class="navbar">
-        <h1><a href="index.php">Findmi</a></h1>
+        <h1><a href="index.php"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></a></h1>
         <div>
             <a href="dashboard.php">Retour au tableau de bord</a>
         </div>

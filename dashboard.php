@@ -137,15 +137,16 @@ foreach ($mes_annonces as $annonce) {
 
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.php" class="nav-logo">Findmi</a>
+            <a href="index.php" class="nav-logo"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></a>
             <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.php">Accueil</a></li>
+                <li><a href="index.php"><?= htmlspecialchars(t('home')) ?></a></li>
                 <?php if (isset($_SESSION['id_utilisateur'])): ?>
-                    <li><a href="profil.php">Profil</a></li>
-                    <li><a href="logout.php">Déconnexion</a></li>
+                    <li><a href="profil.php"><?= htmlspecialchars(t('profile')) ?></a></li>
+                    <li><a href="historique_messages.php"><?= htmlspecialchars(t('my_messages')) ?></a></li>
+                    <li><a href="logout.php"><?= htmlspecialchars(t('logout')) ?></a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -153,8 +154,8 @@ foreach ($mes_annonces as $annonce) {
 
     <div class="dashboard-container">
         <header class="dashboard-header">
-            <h1>Mon Tableau de Bord</h1>
-            <p>Bonjour, <?= htmlspecialchars($_SESSION['email_utilisateur']) ?> ! Gérez vos annonces ici.</p>
+            <h1><?= htmlspecialchars(t('dashboard')) ?></h1>
+            <p>Bonjour, <?= htmlspecialchars($_SESSION['email_utilisateur']) ?> ! <?= htmlspecialchars(t('profile')) ?> ici.</p>
         </header>
 
         <!-- Affichage des messages et erreurs -->

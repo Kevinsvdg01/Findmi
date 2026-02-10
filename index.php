@@ -20,7 +20,7 @@ $annonces_publiees = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Findmi - Retrouvez vos documents perdus</title>
+    <title><?= SITE_NAME ?? 'Findmi' ?> - Retrouvez vos documents perdus</title>
     <!-- On lie le fichier CSS externe -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Font Awesome pour les icônes -->
@@ -247,33 +247,33 @@ $annonces_publiees = $stmt->fetchAll();
     <!-- On garde votre barre de navigation qui est très bien structurée -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.php" class="nav-logo">Findmi</a>
+            <a href="index.php" class="nav-logo"><?= SITE_NAME ?? 'Findmi' ?></a>
             <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.php" class="active">Accueil</a></li>
-                <li><a href="dashboard.php">Tableau de bord</a></li>
+                <li><a href="index.php" class="active"><?= htmlspecialchars(t('home')) ?></a></li>
+                <li><a href="dashboard.php"><?= htmlspecialchars(t('dashboard')) ?></a></li>
                 <?php if (isset($_SESSION['id_utilisateur'])): ?>
-                    <li><a href="profil.php">Profil</a></li>
-                    <li><a href="logout.php">Déconnexion</a></li>
+                    <li><a href="profil.php"><?= htmlspecialchars(t('profile')) ?></a></li>
+                    <li><a href="logout.php"><?= htmlspecialchars(t('logout')) ?></a></li>
                 <?php else: ?>
-                    <li><a href="connexion.php">Connexion</a></li>
+                    <li><a href="connexion.php"><?= htmlspecialchars(t('login')) ?></a></li>
                 <?php endif; ?>
-                <li><a href="apropos.php">À Propos</a></li>
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="apropos.php"><?= htmlspecialchars(t('about')) ?></a></li>
+                <li><a href="contact.php"><?= htmlspecialchars(t('contact')) ?></a></li>
             </ul>
         </div>
     </nav>
 
     <header class="hero-section">
         <div class="hero-content">
-            <img src="/images/logofindmi.jpg" alt="Logo Findmi" class="hero-logo">
-            <h1 class="hero-title">Ne perdez plus espoir, retrouvez-les.</h1>
-            <p class="hero-subtitle">La plateforme citoyenne pour retrouver vos documents et proches.</p>
+            <img src="/images/logofindmi.jpg" alt="Logo <?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?>" class="hero-logo">
+            <h1 class="hero-title"><?= htmlspecialchars(t('hero_title')) ?></h1>
+            <p class="hero-subtitle"><?= htmlspecialchars(t('hero_subtitle')) ?></p>
             <div class="search-bar">
                 <form action="recherche.php" method="GET">
-                    <input type="text" name="q" placeholder="Rechercher une CNI, un passeport...">
+                    <input type="text" name="q" placeholder="<?= htmlspecialchars(t('search_placeholder')) ?>">
                     <button type="submit" aria-label="Rechercher"><i class="fas fa-search"></i></button>
                 </form>
             </div>
@@ -282,7 +282,7 @@ $annonces_publiees = $stmt->fetchAll();
 
     <main class="main-container">
         <section class="latest-annonces fade-in-section">
-            <h2 class="section-title">Dernières annonces publiées</h2>
+            <h2 class="section-title" id="annonces">Dernières annonces publiées</h2>
             <div class="annonces-grid">
                 <?php if (empty($annonces_publiees)): ?>
                     <p>Aucune annonce n'a été publiée pour le moment.</p>
@@ -338,7 +338,7 @@ $annonces_publiees = $stmt->fetchAll();
                 <div class="floating-item"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="floating-item">Espoir</div>
                 <div class="floating-item"><i class="fas fa-shield-alt"></i></div>
-                <div class="floating-item">Findmi</div>
+                <div class="floating-item"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></div>
             </div>
 
             <!-- Le contenu de la section, qui s'affichera par-dessus -->

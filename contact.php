@@ -1,9 +1,21 @@
 <?php
-$pageTitle = "Contact - Findmi";
+session_start();
+require_once 'core/db_connect.php';
+
+$pageTitle = "Contact - " . (defined('SITE_NAME') ? SITE_NAME : 'Findmi');
 $errors = [];
 $success = false;
 
-$name = $email = $subject = $message = "";
+// Initialisation des variables
+$name = '';
+$email = '';
+$subject = '';
+$message = '';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -12,30 +24,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $subject = trim($_POST['subject'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
-    if (empty($name)) $errors[] = "Veuillez renseigner votre nom.";
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Adresse email invalide.";
-    if (empty($subject)) $errors[] = "Veuillez indiquer un sujet.";
-    if (empty($message)) $errors[] = "Le message ne peut pas être vide.";
+    // Validation
+    if (empty($name)) {
+        $errors[] = "Veuillez renseigner votre nom.";
+    }
+
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Adresse email invalide.";
+    }
+
+    if (empty($subject)) {
+        $errors[] = "Veuillez indiquer un sujet.";
+    }
+
+    if (empty($message)) {
+        $errors[] = "Le message ne peut pas être vide.";
+    }
 
     if (empty($errors)) {
-        $to = "contact@findmi.com";
-        $headers = "From: Findmi <no-reply@findmi.com>\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-        $body = "Nom : $name\n";
+        $body  = "Nom : $name\n";
         $body .= "Email : $email\n\n";
         $body .= "Message :\n$message";
 
-        if (mail($to, $subject, $body, $headers)) {
+        $mail = new PHPMailer(true);
+
+        try {
+            // SMTP Gmail
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'Votre_mail@gmail.com';
+            $mail->Password   = 'Votre_mot_de_passe'; // Remplacez par votre mot de passe ou utilisez un mot de passe d'application
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            $mail->CharSet = 'UTF-8';
+
+            $mail->setFrom(SITE_EMAIL ?? 'no-reply@findmi.com', SITE_NAME ?? 'Findmi');
+            $mail->addAddress('Votre_mail@gmail.com');
+            $mail->addReplyTo($email, $name ?: (SITE_NAME . ' Utilisateur'));
+
+            $mail->isHTML(false);
+            $mail->Subject = $subject;
+            $mail->Body    = $body;
+
+            $mail->send();
             $success = true;
-            $name = $email = $subject = $message = "";
-        } else {
-            $errors[] = "Une erreur est survenue lors de l’envoi du message.";
+
+            // Reset formulaire
+            $name = $email = $subject = $message = '';
+        } catch (Exception $e) {
+            $errors[] = "Erreur lors de l’envoi du message. Veuillez réessayer.";
         }
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -170,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.php" class="nav-logo">Findmi</a>
+            <a href="index.php" class="nav-logo"><?= SITE_NAME ?? 'Findmi' ?></a>
             <ul class="nav-links">
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="dashboard.php">Annonces</a></li>
@@ -242,8 +288,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="contact-info">
             <h3>Informations de contact</h3>
             <p><i class="fas fa-envelope"></i> contact@findmi.com</p>
-            <p><i class="fas fa-phone"></i> +226 XX XX XX XX</p>
-            <p><i class="fas fa-location-dot"></i> Burkina Faso</p>
+            <p><i class="fas fa-phone"></i> +226 XX-XX-XX-XX</p>
+            <p><i class="fas fa-location-dot"></i>Ouagadougou, Burkina Faso</p>
         </div>
 
     </section>

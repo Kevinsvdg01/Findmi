@@ -136,7 +136,7 @@ $total_annonces = $annonces['total'];
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.php" class="nav-logo">Findmi</a>
+            <a href="index.php" class="nav-logo"><?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></a>
             <ul class="nav-links">
                 <li><a href="index.php">Accueil</a></li>
                 <li><a href="dashboard.php">Annonces</a></li>
@@ -156,9 +156,9 @@ $total_annonces = $annonces['total'];
     <!-- HERO -->
     <header class="about-hero">
         <div class="hero-content">
-            <h1>À propos de Findmi</h1>
+            <h1>À propos de <?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?></h1>
             <p>
-                Findmi est une plateforme moderne dédiée à la publication et à la recherche d’annonces locales.
+                <?= htmlspecialchars(SITE_NAME ?? 'Findmi') ?> est une plateforme moderne dédiée à la publication et à la recherche d’annonces locales.
                 Notre objectif est de rapprocher les personnes, les services et les opportunités, simplement.
             </p>
         </div>

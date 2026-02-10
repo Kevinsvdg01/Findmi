@@ -68,7 +68,9 @@ $stats_rejetées = $pdo->query("SELECT COUNT(*) FROM annonces WHERE statut_annon
             </div>
             <nav class="sidebar-nav">
                 <a href="index.php" class="active"><i class="fas fa-hourglass-half"></i> Annonces en attente</a>
+                <a href="moderation_messages.php"><i class="fas fa-comments"></i> Modération Messages</a>
                 <a href="historique.php"><i class="fas fa-history"></i> Historique</a>
+                <a href="parametres.php"><i class="fas fa-cog"></i> Paramètres</a>
                 <a href="deconnexion.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
             </nav>
             <div class="sidebar-footer">
