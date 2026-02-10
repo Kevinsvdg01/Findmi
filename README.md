@@ -172,6 +172,25 @@ findmi_site/
 - `DEFAULT_LANGUAGE` — Langue (fr/en)
 - `MAINTENANCE_MODE` — Mode maintenance
 
+
+### Connexion admin: /admin/connexion.php
+
+- Admin 01: `Police Nationale` —--> mail: `police@gmail.com`
+                                    mot de passe: `password123`
+
+- Admin 02: `Mairie` —--> mail: `mairie@gmail.com`
+                          mot de passe: `password123`
+
+
+### Connexion user: /admin/connexion.php
+
+- User 01: `Kevin` —--> mail: `kev@gmail.com`
+                                    mot de passe: `password123`
+
+- User 02: `Yoyo` —--> mail: `yoyo@gmail.com`
+                          mot de passe: `password123`
+
+
 ### Mode Maintenance
 
 Crée `.maintenance` ou update BD :
